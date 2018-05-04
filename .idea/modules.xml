@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/imooc-dubbo.iml" filepath="$PROJECT_DIR$/imooc-dubbo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imooc-dubbo-common/imooc-dubbo-common.iml" filepath="$PROJECT_DIR$/imooc-dubbo-common/imooc-dubbo-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imooc-dubbo-item-api/imooc-dubbo-item-api.iml" filepath="$PROJECT_DIR$/imooc-dubbo-item-api/imooc-dubbo-item-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imooc-dubbo-item-service/imooc-dubbo-item-service.iml" filepath="$PROJECT_DIR$/imooc-dubbo-item-service/imooc-dubbo-item-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imooc-dubbo-order-api/imooc-dubbo-order-api.iml" filepath="$PROJECT_DIR$/imooc-dubbo-order-api/imooc-dubbo-order-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imooc-dubbo-order-service/imooc-dubbo-order-service.iml" filepath="$PROJECT_DIR$/imooc-dubbo-order-service/imooc-dubbo-order-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imooc-dubbo-web/imooc-dubbo-web.iml" filepath="$PROJECT_DIR$/imooc-dubbo-web/imooc-dubbo-web.iml" />
+    </modules>
+  </component>
+</project>

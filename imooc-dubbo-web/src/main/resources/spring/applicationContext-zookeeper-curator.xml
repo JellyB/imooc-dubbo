@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+	<!--重试策略-->
+	<bean id="retryPolicy" class="org.apache.curator.retry.RetryNTimes">
+		<constructor-arg name="n" value="3"></constructor-arg>
+		<constructor-arg name="sleepMsBetweenRetries" value="1000"></constructor-arg>
+	</bean>
+
+
+	<!--zk 客户端 -->
+	<bean id="zkClient" class="org.apache.curator.framework.CuratorFrameworkFactory" factory-method="newClient" init-method="start">
+		<constructor-arg name="connectString" value="127.0.0.1:2181"></constructor-arg>
+		<constructor-arg name="connectionTimeoutMs" value="1500"></constructor-arg>
+		<constructor-arg name="sessionTimeoutMs" value="15000"></constructor-arg>
+		<constructor-arg name="retryPolicy" ref="retryPolicy"></constructor-arg>
+	</bean>
+
+
+	<bean id="zkCurator" class="com.imooc.curator.utils.ZKCurator">
+		<constructor-arg name="client" ref="zkClient"></constructor-arg>
+	</bean>
+
+	<!--分布式锁-->
+	<bean id="distributedLock" class="com.imooc.curator.utils.DistributedLock" init-method="init">
+		<constructor-arg name="client" ref="zkClient"></constructor-arg>
+		<constructor-arg name="nameSpace" value="ZK-locks-nameSpace"></constructor-arg>
+	</bean>
+
+</beans>

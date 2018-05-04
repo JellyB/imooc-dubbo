@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="imooc-dubbo-common" />
+        <module name="imooc-dubbo-item-api" />
+        <module name="imooc-dubbo-item-service" />
+        <module name="imooc-dubbo-order-api" />
+        <module name="imooc-dubbo-order-service" />
+        <module name="imooc-dubbo-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="imooc-dubbo" target="1.8" />
+      <module name="imooc-dubbo-common" target="1.8" />
+      <module name="imooc-dubbo-item-api" target="1.8" />
+      <module name="imooc-dubbo-item-service" target="1.8" />
+      <module name="imooc-dubbo-order-api" target="1.8" />
+      <module name="imooc-dubbo-order-service" target="1.8" />
+      <module name="imooc-dubbo-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

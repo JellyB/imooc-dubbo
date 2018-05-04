@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="imooc-dubbo-item-service:war">
+    <output-path>$PROJECT_DIR$/imooc-dubbo-item-service/target</output-path>
+    <root id="archive" name="imooc-dubbo-item-service.war">
+      <element id="artifact" artifact-name="imooc-dubbo-item-service:war exploded" />
+    </root>
+  </artifact>
+</component>
