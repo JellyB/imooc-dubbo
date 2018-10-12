@@ -10,10 +10,13 @@ spring + curator 操作zookeepr（本地单机模式 127.0.0.1:2181）
 
 分布式锁使用 zookeeper PathChildrenCache 异步监听指定父节点下子节点的创建删除实现
 
-`PathChildrenCache pathChildrenCache = new PathChildrenCache(client, path, true);`
+```java
+PathChildrenCache pathChildrenCache = new PathChildrenCache(client, path, true);
+```
 
 分布式锁初始化命名空间：
-`private void init (){
+```java
+private void init (){
          client.usingNamespace(nameSpace);
          /**
           *  创建zk 总节点
@@ -119,9 +122,12 @@ spring + curator 操作zookeepr（本地单机模式 127.0.0.1:2181）
                    }
                    log.info("分布式锁释放成功！");
                    return true;
-               }`
-               
-关键点：
+               }
+ ```
+ 
+  ***
+  
+> 关键点：
     获取锁，CreateMode 指定为临时节点，如果上一个会话被关闭后不至于一直持有锁
     countDownLatch 阻塞线程
   
