@@ -81,11 +81,17 @@ private void init (){
              }
  
          }
-     }`
+     }
+```
+
+***
+
      zk节点监听节点变化：
-     `/**
+```
+     /**
            * 分布式锁子节点添加watch事件，监听父节点子节点的移除--锁的释放
            */
+
           public void addWatcherToLock(String path) throws Exception{
               final PathChildrenCache pathChildrenCache = new PathChildrenCache(client, path, true);
               pathChildrenCache.start(PathChildrenCache.StartMode.BUILD_INITIAL_CACHE);
