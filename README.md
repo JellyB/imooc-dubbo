@@ -19,7 +19,7 @@ PathChildrenCache pathChildrenCache = new PathChildrenCache(client, path, true);
 private void init (){
          client.usingNamespace(nameSpace);
          /**
-          *  创建zk 总节点
+          *    创建zk 总节点
           *    namespace : ZK-locks-nameSpace
           *                    |
           *                     --  imooc-locks
@@ -50,7 +50,7 @@ private void init (){
      public void getLock(){
  
          /**
-          * 使用死循环，当且仅当上一个锁释放并且当前请求获得锁之后才可以跳出
+          *   使用死循环，当且仅当上一个锁释放并且当前请求获得锁之后才可以跳出
           */
          while (true){
  
@@ -86,14 +86,12 @@ private void init (){
      }
 ```
 
-***
+#### zk节点监听节点变化：
 
-     zk节点监听节点变化：
 ```
-     /**
-           * 分布式锁子节点添加watch事件，监听父节点子节点的移除--锁的释放
+         /**
+           *   分布式锁子节点添加watch事件，监听父节点子节点的移除--锁的释放
            */
-
           public void addWatcherToLock(String path) throws Exception{
               final PathChildrenCache pathChildrenCache = new PathChildrenCache(client, path, true);
               pathChildrenCache.start(PathChildrenCache.StartMode.BUILD_INITIAL_CACHE);
@@ -111,11 +109,15 @@ private void init (){
                       }
                   }
               });
-          }`
+          }
+ ```
+ 
           
-          当前线程请求处理完释放锁：
-          `/**
-                * 释放锁操作
+ #### 当前线程请求处理完释放锁：
+ 
+ ```
+              /**
+                *  释放锁操作
                 * @return 成功过 true 失败 false
                 */
                public boolean releaseLock(){
