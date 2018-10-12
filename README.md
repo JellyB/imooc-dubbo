@@ -14,7 +14,7 @@ zookeeper + dubbo 实现分布式锁
 PathChildrenCache pathChildrenCache = new PathChildrenCache(client, path, true);
 ```
 
-分布式锁初始化命名空间：
+#### 分布式锁初始化命名空间：
 ```java
 private void init (){
          client.usingNamespace(nameSpace);
@@ -38,13 +38,15 @@ private void init (){
          }catch (Exception e){
              log.error("分布式锁初始化失败！");
          }
-     }`
-     
-请求到达获得分布式锁实现：
-`/**
-      * 获取锁，如果成功获取锁，countDownLath -1， 否则一直等待
-      * 锁的实现 -- 创建子节点 DISTRIBUTED_LOCK
-      */
+     }
+```
+   
+#### 请求到达获得分布式锁实现：
+
+> 获取锁，如果成功获取锁，countDownLath -1， 否则一直等待
+> 锁的实现 -- 创建子节点 DISTRIBUTED_LOCK
+
+```java
      public void getLock(){
  
          /**
