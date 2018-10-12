@@ -87,52 +87,48 @@ private void init (){
 ```
 
 #### zk节点监听节点变化：
+> 分布式锁子节点添加watch事件，监听父节点子节点的移除--锁的释放
 
 ```
-         /**
-           *   分布式锁子节点添加watch事件，监听父节点子节点的移除--锁的释放
-           */
-          public void addWatcherToLock(String path) throws Exception{
-              final PathChildrenCache pathChildrenCache = new PathChildrenCache(client, path, true);
-              pathChildrenCache.start(PathChildrenCache.StartMode.BUILD_INITIAL_CACHE);
-      
-              pathChildrenCache.getListenable().addListener(new PathChildrenCacheListener() {
-                  @Override
-                  public void childEvent(CuratorFramework client, PathChildrenCacheEvent event) throws Exception {
-                      if(event.getType() == PathChildrenCacheEvent.Type.CHILD_REMOVED){
-                          String path = event.getData().getPath();
-                          log.info("上一个会话已结束或已经释放锁路径：{}" ,path);
-                          if(path.contains(ZK_LOCK_PROJECT)){
-                              log.info("释放计数器，当前线程可获得分布式锁");
-                              countDownLatch.countDown();
-                          }
-                      }
-                  }
-              });
-          }
+ public void addWatcherToLock(String path) throws Exception{
+     final PathChildrenCache pathChildrenCache = new PathChildrenCache(client, path, true);
+     pathChildrenCache.start(PathChildrenCache.StartMode.BUILD_INITIAL_CACHE);
+
+     pathChildrenCache.getListenable().addListener(new PathChildrenCacheListener() {
+         @Override
+         public void childEvent(CuratorFramework client, PathChildrenCacheEvent event) throws Exception {
+             if(event.getType() == PathChildrenCacheEvent.Type.CHILD_REMOVED){
+                 String path = event.getData().getPath();
+                 log.info("上一个会话已结束或已经释放锁路径：{}" ,path);
+                 if(path.contains(ZK_LOCK_PROJECT)){
+                     log.info("释放计数器，当前线程可获得分布式锁");
+                     countDownLatch.countDown();
+                 }
+             }
+         }
+     });
+ }
  ```
  
           
  #### 当前线程请求处理完释放锁：
  
+ > 释放锁操作
+ > return 成功过 true 失败 false
  ```
-              /**
-                *  释放锁操作
-                * @return 成功过 true 失败 false
-                */
-               public boolean releaseLock(){
-           
-                   try{
-                       if(client.checkExists().forPath(SEPARATOR + ZK_LOCK_PROJECT + SEPARATOR + DISTRIBUTED_LOCK) != null){
-                           client.delete().forPath(SEPARATOR + ZK_LOCK_PROJECT + SEPARATOR + DISTRIBUTED_LOCK);
-                       }
-                   }catch (Exception e){
-                       log.error("释放锁失败！", e);
-                       return false;
-                   }
-                   log.info("分布式锁释放成功！");
-                   return true;
-               }
+      public boolean releaseLock(){
+
+          try{
+              if(client.checkExists().forPath(SEPARATOR + ZK_LOCK_PROJECT + SEPARATOR + DISTRIBUTED_LOCK) != null){
+                  client.delete().forPath(SEPARATOR + ZK_LOCK_PROJECT + SEPARATOR + DISTRIBUTED_LOCK);
+              }
+          }catch (Exception e){
+              log.error("释放锁失败！", e);
+              return false;
+          }
+          log.info("分布式锁释放成功！");
+          return true;
+      }
  ```
  
   ***
