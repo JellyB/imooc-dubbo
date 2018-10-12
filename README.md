@@ -1,14 +1,14 @@
 # imooc-dubbo
 zookeeper + dubbo 实现分布式锁
 
-==spring + curator== 操作 ==zookeepr==（本地单机模式 127.0.0.1:2181）
+`spring + curator` 操作 `zookeepr`（本地单机模式 127.0.0.1:2181）
 消费者：购买商品
 服务提供者：订单服务 order，商品服务 item
 
-消费者服务在模块==dubbo-web==中，引入了接口==item-api==和==odder-api==
-生产者服务由两部分提供:==item-service== & ==order-service==
+消费者服务在模块`dubbo-web`中，引入了接口`item-api`和`odder-api`
+生产者服务由两部分提供`item-service` & `order-service`
 
-分布式锁使用 ==zookeeper== ==PathChildrenCache== 异步监听指定父节点下子节点的创建删除实现
+分布式锁使用 `zookeeper` `PathChildrenCache` 异步监听指定父节点下子节点的创建删除实现
 
 ```java
 PathChildrenCache pathChildrenCache = new PathChildrenCache(client, path, true);
